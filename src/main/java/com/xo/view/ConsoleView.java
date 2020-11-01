@@ -20,7 +20,6 @@ public class ConsoleView {
     private final MoveController moveController = new MoveController();
 
     public void show(Game game) {
-        System.out.format("Game name: %s\n", game.getName());
         Field field = game.getField();
         for (int x = 0; x < field.getSize(); x++) {
             if (x != 0)
@@ -33,7 +32,7 @@ public class ConsoleView {
         Field field = game.getField();
         Figure winner = winnerController.getWinner(field);
         if (winner != null) {
-            System.out.format("Winner is: %s\n", winner);
+            System.out.format("\nWinner is: %s\n", winner);
             return false;
         }
         Figure currentFigure = currentMoveController.currentMove(field);
@@ -41,7 +40,7 @@ public class ConsoleView {
             System.out.println("No winner and no moves left!");
             return false;
         }
-        System.out.format("Please enter move point for: %s\n", currentFigure);
+        System.out.format("It's move point for: %s\n", currentFigure);
         Point point = askPoint();
         try {
             moveController.applyFigure(field, point, currentFigure);
@@ -52,22 +51,20 @@ public class ConsoleView {
     }
 
     private Point askPoint() {
-        return new Point(askCoordinate("X") - 1, askCoordinate("Y") - 1);
-    }
 
-    private int askCoordinate(String coordinateName) {
-        System.out.format("Please input %s: ", coordinateName);
+        System.out.format("Please input coordinates X and Y (through a space): ");
         Scanner in = new Scanner(System.in);
+        int[] coordinates = new int[2];
         try {
-            return in.nextInt();
+            coordinates[0] = in.nextInt();
+            coordinates[1] = in.nextInt();
         } catch (InputMismatchException e) {
             System.out.println("Coordinates are incorrect");
-            return askCoordinate(coordinateName);
         }
+        return new Point(coordinates[0] - 1, coordinates[1] - 1);
     }
 
-    private void printLine(Field field,
-                           int x) {
+    private void printLine(Field field, int x) {
         for (int y = 0; y < field.getSize(); y++) {
             if (y != 0)
                 System.out.print("|");
@@ -88,6 +85,5 @@ public class ConsoleView {
     private void printSeparator() {
         System.out.println("~~~~~~~~~~~");
     }
-
 }
 

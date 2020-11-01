@@ -4,12 +4,10 @@ public class Game {
 
     private final Player[] players;
     private final Field field;
-    private final String name;
 
-    public Game(Player[] players, Field field, String name) {
+    public Game(Player[] players, Field field) {
         this.players = players;
         this.field = field;
-        this.name = name;
     }
 
     public Player[] getPlayers() {
@@ -18,10 +16,6 @@ public class Game {
 
     public Field getField() {
         return field;
-    }
-
-    public String getName() {
-        return name;
     }
 
 }

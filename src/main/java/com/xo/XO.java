@@ -16,7 +16,7 @@ public class XO {
         players[0] = new Player(name1, Figure.X);
         players[1] = new Player(name2, Figure.O);
 
-        Game gameXO = new Game(players, new Field(3), "XO");
+        Game gameXO = new Game(players, new Field(3));
 
         ConsoleView consoleView = new ConsoleView();
         consoleView.show(gameXO);

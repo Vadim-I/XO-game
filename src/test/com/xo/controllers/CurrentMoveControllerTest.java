@@ -37,16 +37,17 @@ public class CurrentMoveControllerTest {
     public void testCurrentMoveWhenNoNextMove() throws Exception {
         CurrentMoveController currentMoveController = new CurrentMoveController();
         Field field = new Field(3);
-        field.setFigure(new Point(0, 0), Figure.O);
-        field.setFigure(new Point(0, 1), Figure.X);
-        field.setFigure(new Point(0, 2), Figure.O);
-        field.setFigure(new Point(1, 0), Figure.O);
-        field.setFigure(new Point(1, 1), Figure.X);
-        field.setFigure(new Point(1, 2), Figure.O);
-        field.setFigure(new Point(2, 0), Figure.O);
-        field.setFigure(new Point(2, 1), Figure.X);
-        field.setFigure(new Point(2, 2), Figure.O);
+        int count = 1;
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (count % 2 == 0) {
+                    field.setFigure(new Point(i,j), Figure.X);
+                } else {
+                    field.setFigure(new Point(i,j), Figure.O);
+                }
+                count++;
+            }
+        }
         assertNull(currentMoveController.currentMove(field));
     }
-
 }
